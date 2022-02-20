@@ -1,6 +1,5 @@
 package com.adressbook;
-/*Ability to delete contact in  address book
- * by using name
+/*Ability to Add Multiple contacts in  address book
  * i/p form user
  */
 
@@ -107,13 +106,30 @@ public class addressBookMain {
 		}
 	}
 
+	public void addMultiplePerson() {
+		while (true) {
+			System.out.println(
+					"Enter the option \n1)To Add Contect\n2)To Edit Contact" + "\n3)To Delete Contact\n4)exit");
+			int option = scanner.nextInt();
+			switch (option) {
+			case 1 -> addPerson();
+			case 2 -> editPerson();
+			case 3 -> deletePerson();
+			case 4 -> System.out.println("Exiting");
+			default -> System.out.println("Invalid option");
+			}
+			if (option == 4)
+				break;
+		}
+	}
+
 	public static void main(String[] args) {
 		addressBookMain addressBook = new addressBookMain();
 		System.out.println("Welcome to Address Book Program in AddressBookMain class");
 		addressBook.addPerson();
 		addressBook.editPerson();
 		addressBook.deletePerson();
-
+		addressBook.addMultiplePerson();
 	}
 
-}// end of class
+}
