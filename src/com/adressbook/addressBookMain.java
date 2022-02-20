@@ -1,5 +1,5 @@
 package com.adressbook;
-/*Ability to edit contact in  address book
+/*Ability to delete contact in  address book
  * by using name
  * i/p form user
  */
@@ -30,7 +30,7 @@ public class addressBookMain {
 		String email = scanner.next();
 //creating addressBook object and passing arguments inside constructor
 		addressBook p = new addressBook(firstName, lastName, address, city, state, zip, phoneNumber, email);
-//adding p object into the linked list with Contact class data type
+//adding p object into the linked list with addressBook class data type
 		person.add(p);
 //printing person array list
 		System.out.println(person);
@@ -47,7 +47,7 @@ public class addressBookMain {
 			if (s.equals(p.getFirstName())) {
 				while (true) {
 					System.out.println("Enter choice to edit 1)firstName\n2)lastName\n3)address\n"
-							+ "4)city\n5)state\n6)zip\n7)phoneNumber\n8)email9)exit");/// choices as per user i/p
+							+ "4)city\n5)state\n6)zip\n7)phoneNumber\n8)email9)exit");// choice of i/p by user
 					int choice = scanner.nextInt();
 					switch (choice) {
 					case 1:
@@ -80,9 +80,9 @@ public class addressBookMain {
 					}// end of switch case
 					if (choice == 9)
 						break;
-				} // end of while
+				} // end while
 				person.set(i, p);
-				System.out.println("person after editing");
+				System.out.println("Person after editing");
 				System.out.println(person);
 
 			} // end of if
@@ -90,11 +90,30 @@ public class addressBookMain {
 
 	}
 
+	public void deletePerson() {
+		System.out.println("Enter the name to search and delete");
+		String s = scanner.next();
+		for (int i = 0; i < person.size(); i++) {
+			addressBook p = person.get(i);
+			if (s.equals(p.getFirstName())) {
+				person.remove(i);
+			}
+		}
+		System.out.println("Contact after deletion");
+		if (person.isEmpty() != true)
+			System.out.println(person);
+		else {
+			System.out.println("Contacts deleted");
+		}
+	}
+
 	public static void main(String[] args) {
 		addressBookMain addressBook = new addressBookMain();
 		System.out.println("Welcome to Address Book Program in AddressBookMain class");
 		addressBook.addPerson();
 		addressBook.editPerson();
+		addressBook.deletePerson();
 
 	}
-}/// end of class
+
+}// end of class
