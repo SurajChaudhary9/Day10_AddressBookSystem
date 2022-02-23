@@ -1,5 +1,5 @@
-/*UC5:PROBLEM STATEMENT
- * Ability to ADD MULTIPLE contact in address book using first name
+/*UC6:PROBLEM STATEMENT
+ * Ability to add multiple address book 
  * i/p from user for choice operation
  */
 package com.adressbook;
@@ -19,7 +19,7 @@ public class AddressBookMain {
 		int choice;
 		do {
 			System.out.println("Enter the option \n1)To Add Contect\n2)To Display Contact"
-					+ "\n3)To Update Contact\n4)To Delete Contact");
+					+ "\n3)To Update Contact\n4)To Delete Contact\n5)exit");
 			choice = sc.nextInt();
 
 			switch (choice) {
@@ -119,9 +119,13 @@ public class AddressBookMain {
 				}
 				System.out.println("_____________________________________");
 				break;
+			case 5:
+				break;
 			default:
 				System.out.println("default");
 			}
+			if (choice == 5)
+				break;
 		} while (choice != 0);
 	}
 
