@@ -1,5 +1,5 @@
-/*UC3:PROBLEM STATEMENT
- * Ability to edit contact in address book using first name
+/*UC4:PROBLEM STATEMENT
+ * Ability to delete contact in address book using first name
  * i/p from user for choice operation
  */
 package com.adressbook;
@@ -10,17 +10,17 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class AddressBookMain {
+	static Scanner sc = new Scanner(System.in);
+	static Scanner sc1 = new Scanner(System.in);
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to the address book system");
 		List<Contacts> collection = new ArrayList<Contacts>();
-		Scanner sc = new Scanner(System.in);
-		Scanner sc1 = new Scanner(System.in);
+
 		int choice;
 		do {
-			System.out.println("1.Add Contact");
-			System.out.println("2.Display Contact");
-			System.out.println("3.Update contact ");
-			System.out.println("Enter your choice");
+			System.out.println("Enter the option \n1)To Add Contect\n2)To Display Contact"
+					+ "\n3)To Update Contact\n4)To Delete Contact");
 			choice = sc.nextInt();
 
 			switch (choice) {
@@ -39,19 +39,26 @@ public class AddressBookMain {
 				int zip = sc.nextInt();
 				System.out.print("Enter phone number: ");
 				String phoneNumber = sc1.nextLine();
-				System.out.print("Enter your emailID: ");
+				System.out.print("Enter your EMail ID: ");
 				String emailId = sc1.nextLine();
 				Contacts contacts = new Contacts(firstName1, lastName, address, city, state, zip, phoneNumber, emailId);
 				collection.add(contacts);
 				break;
 			case 2:
-				System.out.println(collection);
+				System.out.println("______________________________________");
+				java.util.Iterator<Contacts> i = collection.iterator();
+				while (i.hasNext()) {
+					contacts = i.next();
+					System.out.println(contacts);
+				}
+				System.out.println("________________________________________");
+
 				break;
 			case 3:
 				boolean found = false;
 				System.out.println("Enter first name of the person for update ");
 				firstName1 = sc1.nextLine();
-				System.out.println("------------------------------------");
+				System.out.println("___________________________________________");
 
 				ListIterator<Contacts> listIterator = collection.listIterator();
 				/*
@@ -62,10 +69,8 @@ public class AddressBookMain {
 				while (listIterator.hasNext()) {
 					contacts = listIterator.next();
 
-					if (contacts.getFirstName().equals(firstName1)) { // entering the condition if fname matches
+					if (contacts.getFirstName().equals(firstName1)) {// check for first name and check for same
 
-						System.out.print("Enter new first Name: ");
-						firstName1 = sc1.nextLine();
 						System.out.print("Enter new last Name: ");
 						lastName = sc1.nextLine();
 						System.out.print("Enter your new address: ");
@@ -77,22 +82,43 @@ public class AddressBookMain {
 						System.out.print("Enter zip code : ");
 						zip = sc.nextInt();
 						System.out.print("Enter phone number: ");
-						phoneNumber = sc1.nextLine();
-						System.out.print("Enter your eMail ID: ");
+						phoneNumber = sc.nextLine();
+						System.out.print("Enter your EMail ID: ");
 						emailId = sc1.nextLine();
 						listIterator.set(
 								new Contacts(firstName1, lastName, address, city, state, zip, phoneNumber, emailId));
 						found = true;
 					}
 				}
-				System.out.println("_____________________________________");
+				System.out.println("___________________________________");
 
 				if (!found) {
-					System.out.println("Record not found");// o/p for mismatch first name
+					System.out.println("Record not found");
 				} else {
 					System.out.println("Record is updated successfully");
 				}
-				System.out.println("_______________________________________");
+				System.out.println("___________________________________");
+				break;
+			case 4:
+				found = false;
+				System.out.println("Enter first name of the person for delete ");
+				firstName1 = sc1.nextLine();
+				System.out.println("____________________________________");
+				i = collection.iterator();
+				while (i.hasNext()) {
+					contacts = i.next();
+					if (contacts.getFirstName().equals(firstName1)) {
+						i.remove();
+						found = true;
+					}
+				}
+				System.out.println("____________________________________");
+				if (!found) {
+					System.out.println("Record not found");
+				} else {
+					System.out.println("Record is deleted successfully");
+				}
+				System.out.println("_____________________________________");
 				break;
 			default:
 				System.out.println("default");
